@@ -60,21 +60,17 @@ fn part1() -> Result<(), Box<dyn Error>> {
 #[inline(never)]
 fn part2() {
     let mut vec_o_vecs: Vec<Vec<u64>> = Vec::new();
-    let mut new_vecs = Vec::new();
     'outer: for num in INPUT.iter() {
-        for vec in vec_o_vecs.iter() {
-            let cur_sum: u64 = vec.iter().sum::<u64>() + num;
-            if vec.len() == 2 && cur_sum == 2020 {
-                println!("{}", vec.iter().product::<u64>() * num);
+        for i in 0..vec_o_vecs.len() {
+            let cur_sum: u64 = vec_o_vecs[i].iter().sum::<u64>() + num;
+            if vec_o_vecs[i].len() == 2 && cur_sum == 2020 {
+                println!("{}", vec_o_vecs[i].iter().product::<u64>() * num);
                 break 'outer;
             } else if cur_sum < 2020 {
-                let mut clone = vec.clone();
+                let mut clone = vec_o_vecs[i].clone();
                 clone.push(*num);
-                new_vecs.push(clone);
+                vec_o_vecs.push(clone);
             }
-        }
-        while let Some(vec) = new_vecs.pop() {
-            vec_o_vecs.push(vec);
         }
         vec_o_vecs.push(vec![*num]);
     }
