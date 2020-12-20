@@ -64,7 +64,7 @@ fn part2() {
         for i in 0..vec_o_vecs.len() {
             let cur_sum: u64 = vec_o_vecs[i].iter().sum::<u64>() + num;
             if vec_o_vecs[i].len() == 2 && cur_sum == 2020 {
-                println!("{}", vec_o_vecs[i].iter().product::<u64>() * num);
+                println!("{}, {}", vec_o_vecs[i].iter().product::<u64>() * num, vec_o_vecs.len());
                 break 'outer;
             } else if cur_sum < 2020 {
                 let mut clone = vec_o_vecs[i].clone();
